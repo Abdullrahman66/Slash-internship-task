@@ -49,18 +49,9 @@ def detect_objects(image):
     detected_classes = []
     for i in range(len(boxes)):
         if i in indexes:
-            # x, y, w, h = boxes[i]
-            # label = str(classes[class_ids[i]])
-            # cv2.rectangle(img, (x, y), (x + w, y + h), colorGreen, 3)
-            # cv2.putText(img, label, (x, y + 10), cv2.FONT_HERSHEY_PLAIN, 8, colorRed, 8)
             label = str(classes[class_ids[i]])
             detected_classes.append(label)
     return detected_classes
-# print("Detected classes:", detected_classes)
-#cv2.imshow("Image", img)
-# cv2.imwrite("output.jpg",img)
-#cv2.waitKey(0)
-#cv2.destroyAllWindows()
 # Streamlit UI
 st.title("YOLO Object Detection")
 st.write("Upload an image and click the 'Analyze' button to detect objects.")
