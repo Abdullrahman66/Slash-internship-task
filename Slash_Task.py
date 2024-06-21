@@ -64,15 +64,18 @@ if uploaded_file is not None:
     image = Image.open(uploaded_file)
     st.image(image, caption='Uploaded Image', use_column_width=True)
     st.write("")
-    st.write("Analyzing...")
 
-    image_np = np.array(image.convert('RGB'))
-    image_np = cv2.cvtColor(image_np, cv2.COLOR_RGB2BGR)
-    
-    detected_image, detected_classes = detect_objects(image_np)
+    if st.button("Analyze"):
+        st.write("Analyzing...")
 
-    # Convert BGR image back to RGB
-    detected_image = cv2.cvtColor(detected_image, cv2.COLOR_BGR2RGB)
+        # Convert the uploaded image to a NumPy array and then to BGR format for OpenCV
+        image_np = np.array(image.convert('RGB'))
+        image_np = cv2.cvtColor(image_np, cv2.COLOR_RGB2BGR)
+        
+        detected_image, detected_classes = detect_objects(image_np)
 
-    st.image(detected_image, caption='Detected Image with Bounding Boxes', use_column_width=True)
-    st.write("Detected classes:", detected_classes)
+        # Convert BGR image back to RGB
+        detected_image = cv2.cvtColor(detected_image, cv2.COLOR_BGR2RGB)
+
+        st.image(detected_image, caption='Detected Image with Bounding Boxes', use_column_width=True)
+        st.write("Detected classes:", detected_classes)
